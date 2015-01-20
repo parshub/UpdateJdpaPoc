@@ -15,7 +15,7 @@ public class DriverHandler
 	
 	public DriverHandler() throws IOException 
 	{
-		System.setProperty("webdriver.chrome.driver", "/home/himansu/Downloads/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "./lib/chromedriver");
 		driver = new ChromeDriver(); 
 		//driver = new FirefoxDriver();
 	}
