@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="TestSuite" duration-ms="15174" started-at="2015-01-21T10:19:14Z" finished-at="2015-01-21T10:19:30Z">
+  <suite name="TestSuite" duration-ms="20366" started-at="2015-01-21T14:43:55Z" finished-at="2015-01-21T14:44:15Z">
     <groups>
     </groups>
-    <test name="Test FF" duration-ms="15174" started-at="2015-01-21T10:19:14Z" finished-at="2015-01-21T10:19:30Z">
+    <test name="Test FF" duration-ms="20366" started-at="2015-01-21T14:43:55Z" finished-at="2015-01-21T14:44:15Z">
       <class name="com.jdpa.services.Controller">
-        <test-method status="PASS" signature="init()[pri:0, instance:com.jdpa.services.Controller@17620d83]" name="init" duration-ms="10793" started-at="2015-01-21T15:49:14Z" finished-at="2015-01-21T15:49:25Z">
+        <test-method status="PASS" signature="init()[pri:0, instance:com.jdpa.services.Controller@d818ff0]" name="init" duration-ms="15737" started-at="2015-01-21T20:13:55Z" finished-at="2015-01-21T20:14:10Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method status="PASS" signature="firstTest()[pri:0, instance:com.jdpa.services.Controller@17620d83]" name="firstTest" duration-ms="4231" started-at="2015-01-21T15:49:25Z" finished-at="2015-01-21T15:49:30Z">
+        <test-method status="PASS" signature="firstTest()[pri:0, instance:com.jdpa.services.Controller@d818ff0]" name="firstTest" duration-ms="4439" started-at="2015-01-21T20:14:11Z" finished-at="2015-01-21T20:14:15Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- firstTest -->
