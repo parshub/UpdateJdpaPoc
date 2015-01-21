@@ -35,42 +35,36 @@ public class Controller {
 	DBUtilities objectOfDBUtilities = new DBUtilities();
 	
 	static List<String> listquestionKey = new ArrayList<String>();
+	static List<List<String>> listquestionResponce = new ArrayList<List<String>>();
+	static List<String> listquestionFlag = new ArrayList<String>();
 	
 	public static List<String> getListquestionKey() {
 		return listquestionKey;
 	}
 
-
-	public static void setListquestionKey(List<String> listquestionKey) {
-		Controller.listquestionKey = listquestionKey;
-	}
-
-	static List<List<String>> listquestionResponce = new ArrayList<List<String>>();
-	
 	public static List<List<String>> getListquestionResponce() {
 		return (List<List<String>>) listquestionResponce;
 	}
-
-	static List<String> listquestionFlag = new ArrayList<String>();
 	
 	public List<String> getQuestion() {
 		return listquestionFlag;
 	}
 	
-
-	@BeforeTest
+	String traversalFileName = "TraversalPath.json";
+	
+	@Test(priority=1)
 	public void init() throws IOException, ParseException {
 		driver = DriverHandler.getDriver();
 		driver.get("http://scripting.jdpoweronline.com/mrIWeb/mrIWeb.dll?I.Project=T1_QTYPE&i.test=1");
 		driver.findElement(By.cssSelector("input.mrNext")).click();
-		travesalObject = jsonServiceObject.convertFileObjTOJsonObj("TraversalPath.json");
+		travesalObject = jsonServiceObject.convertFileObjTOJsonObj(traversalFileName);
 		questionObject = jsonServiceObject.convertFileObjTOJsonObj("QuestionData.json");
 		//travesalObject = objectOfDBUtilities.fetchJSONObject("TraversalPath");
 		//questionObject = objectOfDBUtilities.fetchJSONObject("QuestionData");
 
 	}
 
-	@Test
+	@Test(priority=2)
 	public void firstTest() {
 		ArrayList arraylistObject = objectOfDataConversion
 				.sortJsonAsPerKey(travesalObject);

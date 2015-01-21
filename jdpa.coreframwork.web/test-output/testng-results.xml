@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="TestSuite" duration-ms="20089" started-at="2015-01-20T05:31:52Z" finished-at="2015-01-20T05:32:12Z">
+  <suite name="TestSuite" duration-ms="15174" started-at="2015-01-21T10:19:14Z" finished-at="2015-01-21T10:19:30Z">
     <groups>
     </groups>
-    <test name="Test FF" duration-ms="20089" started-at="2015-01-20T05:31:52Z" finished-at="2015-01-20T05:32:12Z">
+    <test name="Test FF" duration-ms="15174" started-at="2015-01-21T10:19:14Z" finished-at="2015-01-21T10:19:30Z">
       <class name="com.jdpa.services.Controller">
-        <test-method status="PASS" signature="init()[pri:0, instance:com.jdpa.services.Controller@4c1ce791]" name="init" is-config="true" duration-ms="16087" started-at="2015-01-20T11:01:52Z" finished-at="2015-01-20T11:02:08Z">
+        <test-method status="PASS" signature="init()[pri:0, instance:com.jdpa.services.Controller@17620d83]" name="init" duration-ms="10793" started-at="2015-01-21T15:49:14Z" finished-at="2015-01-21T15:49:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method status="PASS" signature="firstTest()[pri:0, instance:com.jdpa.services.Controller@4c1ce791]" name="firstTest" duration-ms="3992" started-at="2015-01-20T11:02:08Z" finished-at="2015-01-20T11:02:12Z">
+        <test-method status="PASS" signature="firstTest()[pri:0, instance:com.jdpa.services.Controller@17620d83]" name="firstTest" duration-ms="4231" started-at="2015-01-21T15:49:25Z" finished-at="2015-01-21T15:49:30Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- firstTest -->

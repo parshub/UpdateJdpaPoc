@@ -11,19 +11,24 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.jdpa.utilities.DBUtilities;
+
 public class ReportData {
 	String surveyTrackTest;
 	String testSurveyName;
 	String expectedData;
-	static List<String>  testStep = new ArrayList<String>();
+	int status ;
+	String  testStep ;
+	
 	List<String> actualData = new ArrayList<String>();
-	List<Integer> status = new  ArrayList<Integer>();
 	List<String> listquetionId = new ArrayList<String>();
 	List<List<String>> listResponce = new ArrayList<List<String>>();
-
-	JSONArray objJsonArray = new JSONArray();
+	long totalTimeDuratioOfOneTestStep ;
+	
 	String tempStatus = "Not Verfied";
 	String tempActual = null;
+
+	JSONArray objJsonArray = new JSONArray();
 	File file =new File("/jdpa.coreframwork.web/Report.json");
 	
 	
@@ -40,7 +45,7 @@ public class ReportData {
 	}
 
 	public void setTestStep(String testStep){
-		this.testStep.add(testStep);
+		this.testStep = testStep;
 	}
 
 	public void setQuetionID(List<String> listquetionId) {
@@ -60,9 +65,13 @@ public class ReportData {
 	}
 
 	public void setStatus(int status) {
-		this.status.add(status);
+		this.status = status;
 	}
-
+	
+	public void setTotalTimeDuratioOfOneTestStep(long totalTimeDuratioOfOneTestStep) {
+		this.totalTimeDuratioOfOneTestStep = totalTimeDuratioOfOneTestStep;
+	}
+	
 	public String getSurveyTrackTest() {
 		return surveyTrackTest;
 	}
@@ -71,7 +80,7 @@ public class ReportData {
 		return testSurveyName;
 	}
 
-	public List<String> getTestStep() {
+	public String getTestStep() {
 		return testStep;
 	}
 
@@ -91,39 +100,92 @@ public class ReportData {
 		return actualData;
 	}
 
-	public List<Integer> getStatus() {
+	public int getStatus() {
 		return status;
+	}
+
+	public long getTotalTimeDuratioOfOneTestStep() {
+		return totalTimeDuratioOfOneTestStep;
 	}
 
 	
 	public void createJsonFileForTestReoprt() throws IOException 
 	{
-		FileWriter fileWritter = new FileWriter(file.getName(),true);
-		BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-			
-		for (int i = 0; i < listquetionId.size(); i++)
-		{
+		//FileWriter fileWritter = new FileWriter(file.getName(),true);
+		//BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+		DBUtilities objDBUtilities = new DBUtilities();
+		JSONObject finalJsonObj = new JSONObject();
+		String collectionName = "Report";
+		if(listquetionId.size()!=0)
+		{	
+			for (int i = 0; i < listquetionId.size(); i++)
+			{
+				JSONObject tempJsonObj = new JSONObject();
+				if(status == 1)
+					tempStatus = "Passed";
+				else if(status == 2)
+					tempStatus = "Failed" ;
+				else 
+					tempStatus = "Skipped" ;
+				surveyTrackTest = tempStatus;
+				tempJsonObj.put("surveyTrackTest ",surveyTrackTest);
+				tempJsonObj.put("Expected ","Verified" );
+				tempJsonObj.put("Status ", tempStatus);
+				tempJsonObj.put("Questio ID ", listquetionId.get(i));
+				tempJsonObj.put("listResponce",  listResponce.get(i));
+				if(actualData.get(i).equals("true"))
+					tempActual = "Verified";
+				tempJsonObj.put("Actual ", tempActual);
+				objJsonArray.add(tempJsonObj);
+			}
+			finalJsonObj.put("Time Taken By Current Step", totalTimeDuratioOfOneTestStep);
+			finalJsonObj.put("surveyTrackTest ",surveyTrackTest);
+			finalJsonObj.put("testSurveyName ", "TraversalPath.json");
+			finalJsonObj.put("testStep ",testStep);
+			finalJsonObj.put(testStep, objJsonArray);
+			objDBUtilities.saveData(collectionName,finalJsonObj);
+		}
+		else {
 			JSONObject objJson = new JSONObject();
-			if(status.get(0) == 1)
+
+			if(status == 1)
 				tempStatus = "Passed";
-			else if(status.get(0) == 2)
+			else if(status == 2)
 				tempStatus = "Failed" ;
 			else 
 				tempStatus = "Skipped" ;
 			surveyTrackTest = tempStatus;
+
+			objJson.put("Time Taken By Current Step", totalTimeDuratioOfOneTestStep);
 			objJson.put("surveyTrackTest ",surveyTrackTest);
 			objJson.put("testSurveyName ", "TraversalPath.json");
-			objJson.put("testStep ",testStep.get(0));
-			objJson.put("Questio ID ", listquetionId.get(i));
-			objJson.put("listResponce",  listResponce.get(i));
-		    if(actualData.get(i).equals("true"))
-		    	tempActual = "Verified";
-		    objJson.put("Actual ", tempActual);
-		    objJson.put("Expected ","Verified" );
-		    objJson.put("Status ", tempStatus);
-		    objJsonArray.add(objJson);
+			objJson.put("testStep ",testStep);
+			objJson.put("Expected ","Verified" );
+			objJson.put("Status ", tempStatus);
+			objJsonArray.add(objJson);
+			finalJsonObj.put(testStep, objJsonArray);
+			objDBUtilities.saveData(collectionName , finalJsonObj);
 		}
-		bufferWritter.write(objJsonArray.toJSONString());
-		bufferWritter.close();
+		//bufferWritter.write(finalJsonObj.toJSONString());
+		//bufferWritter.close();
 	}
 }
+
+
+
+
+//JSONObject objJson = new JSONObject();
+
+/*if(status == 1)
+	tempStatus = "Passed";
+else if(status == 2)
+	tempStatus = "Failed" ;
+else 
+	tempStatus = "Skipped" ;
+surveyTrackTest = tempStatus;
+
+objJson.put("surveyTrackTest ",surveyTrackTest);
+objJson.put("testSurveyName ", "TraversalPath.json");
+objJson.put("testStep ",testStep);
+objJson.put("Expected ","Verified" );
+objJson.put("Status ", tempStatus);*/

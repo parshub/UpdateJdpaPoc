@@ -11,74 +11,73 @@ import com.jdpa.services.Controller;
 
 public class CustomListener extends TestListenerAdapter 
 {
-	ReportData objReportData = new ReportData();
 	Controller objeController = new Controller();
+
 	long startTimeInMilliSecond ;
 	long endTimeInMilliSecond  ;
 	long totalTimeInMilliSecond ;
 
 	@Override
-	public void onTestFailure(ITestResult tr) {
+	public void onTestFailure(ITestResult tr)
+	{
+		ReportData objReportData = new ReportData();
 		objReportData.setTestStep(tr.getName());
 		objReportData.setStatus(tr.getStatus());
 		objReportData.setQuetionID(objeController.getListquestionKey());
 		objReportData.setResponse(objeController.getListquestionResponce());
 		objReportData.setActualData(objeController.getQuestion());
+		startTimeInMilliSecond = tr.getStartMillis();
+		endTimeInMilliSecond  = tr.getEndMillis();
+		totalTimeInMilliSecond = ( endTimeInMilliSecond - startTimeInMilliSecond )/1000;
+		objReportData.setTotalTimeDuratioOfOneTestStep(totalTimeInMilliSecond);
 		try {
 			objReportData.createJsonFileForTestReoprt();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		startTimeInMilliSecond = tr.getStartMillis();
-		endTimeInMilliSecond  = tr.getEndMillis();
-		totalTimeInMilliSecond = ( endTimeInMilliSecond - startTimeInMilliSecond )/1000;
-		System.out.println("startTimeInMilliSecond  :-"+startTimeInMilliSecond);
-		System.out.println("endTimeInMilliSecond  :-"+endTimeInMilliSecond);
-		System.out.println("totalTimeInMilliSecond  :-"+totalTimeInMilliSecond);
 	}
 
 	@Override
-	public void onTestSuccess(ITestResult tr) {
+	public void onTestSuccess(ITestResult tr) 
+	{
+		ReportData objReportData = new ReportData();
 		objReportData.setTestStep(tr.getName());
 		objReportData.setStatus(tr.getStatus());
 		objReportData.setQuetionID(objeController.getListquestionKey());
 		objReportData.setResponse(objeController.getListquestionResponce());
 		objReportData.setActualData(objeController.getQuestion());
+		startTimeInMilliSecond = tr.getStartMillis();
+		endTimeInMilliSecond  = tr.getEndMillis();
+		totalTimeInMilliSecond = ( endTimeInMilliSecond - startTimeInMilliSecond )/1000;
+		objReportData.setTotalTimeDuratioOfOneTestStep(totalTimeInMilliSecond);
 		try {
 			objReportData.createJsonFileForTestReoprt();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		startTimeInMilliSecond = tr.getStartMillis();
-		endTimeInMilliSecond  = tr.getEndMillis();
-		totalTimeInMilliSecond = ( endTimeInMilliSecond - startTimeInMilliSecond )/1000;
-		System.out.println("startTimeInMilliSecond  :-"+startTimeInMilliSecond);
-		System.out.println("endTimeInMilliSecond  :-"+endTimeInMilliSecond);
-		System.out.println("totalTimeInMilliSecond  :-"+totalTimeInMilliSecond);
-		System.out.println(Reporter.getOutput(tr).size());
 	}
 
 	@Override
-	public void onTestSkipped(ITestResult tr) {
+	public void onTestSkipped(ITestResult tr) 
+	{
+		ReportData objReportData = new ReportData();
 		objReportData.setTestStep(tr.getName());
 		objReportData.setStatus(tr.getStatus());
 		objReportData.setQuetionID(objeController.getListquestionKey());
 		objReportData.setResponse(objeController.getListquestionResponce());
 		objReportData.setActualData(objeController.getQuestion());
+		startTimeInMilliSecond = tr.getStartMillis();
+		endTimeInMilliSecond  = tr.getEndMillis();
+		totalTimeInMilliSecond = ( endTimeInMilliSecond - startTimeInMilliSecond )/1000;
+		objReportData.setTotalTimeDuratioOfOneTestStep(totalTimeInMilliSecond);
 		try {
 			objReportData.createJsonFileForTestReoprt();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		startTimeInMilliSecond = tr.getStartMillis();
-		endTimeInMilliSecond  = tr.getEndMillis();
-		totalTimeInMilliSecond = ( endTimeInMilliSecond - startTimeInMilliSecond )/1000;
-		System.out.println("startTimeInMilliSecond  :-"+startTimeInMilliSecond);
-		System.out.println("endTimeInMilliSecond  :-"+endTimeInMilliSecond);
-		System.out.println("totalTimeInMilliSecond  :-"+totalTimeInMilliSecond);
 	}	
 }
 
