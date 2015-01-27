@@ -23,7 +23,7 @@ public class DBUtilities
 		try 
 		{
 			MongoClient mongo;
-			mongo = new MongoClient("localhost", 27017);
+			mongo = new MongoClient("50.50.50.160", 27017);
 			DB db = mongo.getDB("jdpa");
 			DBCollection collection = db.getCollection(collectionName);
 			DBCursor curser = collection.find();
